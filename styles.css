@@ -1,0 +1,331 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 200vh; /* Para crear scroll */
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    gap: 4rem;
+}
+
+/* Información personal a la izquierda */
+.personal-info {
+    color: white;
+    z-index: 5;
+    position: relative;
+}
+
+.personal-info h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    line-height: 1.1;
+}
+
+.personal-info h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #e0e7ff;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.personal-info p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 400px;
+}
+
+.scroll-hint {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: pulse 2s infinite;
+}
+
+.scroll-hint span {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Contenedor de la animación a la derecha */
+.animation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Wrapper que mantiene la escala y proporción */
+.animation-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .personal-info {
+        order: 1;
+    }
+    
+    .animation-container {
+        order: 2;
+        height: 60vh;
+    }
+    
+    .personal-info h1 {
+        font-size: 2.8rem;
+    }
+    
+    .personal-info h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .animation-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .personal-info h1 {
+        font-size: 2.5rem;
+    }
+    
+    .personal-info p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .animation-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .personal-info h1 {
+        font-size: 2rem;
+    }
+    
+    .personal-info h2 {
+        font-size: 1.3rem;
+    }
+    
+    .personal-info p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+}
+
+/* Imagen de la caja */
+.box-image {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Imagen de la cabeza */
+.head-image {
+    position: absolute;
+    width: 95%;
+    height: auto;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Contenedor para anclar pupilas a la cabeza */
+.head-container {
+    position: absolute;
+    width: 95%;
+    height: auto;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 2;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none; /* Para que no interfiera con el mouse */
+}
+
+/* Pupilas - Círculos que siguen el cursor */
+.pupil-left,
+.pupil-right {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    z-index: 2;
+    transition: all 0.1s ease-out;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+.pupil-left {
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pupil-right {
+    top: 20%;
+    left: 60%;
+    transform: translate(-20%, -20%);
+}
+
+/* Estados de la animación */
+.animation-wrapper.scrolled .head-image {
+    top: 75%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.animation-wrapper.scrolled .head-container {
+    top: 75%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.animation-wrapper.scrolled .box-image {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Animación de entrada suave */
+.animation-wrapper.fade-in {
+    animation: fadeInScale 1s ease-out;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Efecto de hover para interactividad */
+.animation-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.animation-wrapper:hover .pupil-left,
+.animation-wrapper:hover .pupil-right {
+    animation: blinkEyes 0.5s ease-in-out;
+}
+
+@keyframes blinkEyes {
+    0%, 100% { transform: translate(-50%, -50%) scaleY(1); }
+    50% { transform: translate(-50%, -50%) scaleY(0.1); }
+}
+
+/* Contenido adicional */
+.content {
+    background: white;
+    padding: 4rem 2rem;
+    margin-top: 2rem;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 5;
+}
+
+.content h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+}
+
+.content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+}
+
+/* Snippet reutilizable - Clase principal */
+.scroll-animation-snippet {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.scroll-animation-snippet .animation-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+}
+
+/* Mantener proporción en cualquier tamaño */
+.scroll-animation-snippet .animation-wrapper img {
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
