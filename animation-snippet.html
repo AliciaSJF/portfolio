@@ -89,7 +89,7 @@ Mantiene la escala y funcionalidad intacta.
 }
 
 .scroll-animation-container .pupil-left {
-    top: 18%;
+    top: 0%;
     left: 43%;
     transform: translate(-50%, -50%);
 }
@@ -169,7 +169,7 @@ function initScrollAnimationSnippet(containerSelector = '.scroll-animation-conta
             const moveY = (deltaY / distance) * Math.min(distance, maxDistance);
             
             if (distance > 0) {
-                pupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+                pupil.style.transform = `translate(calc(-20% + ${moveX}px), calc(-20% + ${moveY}px))`;
             }
         });
     }
