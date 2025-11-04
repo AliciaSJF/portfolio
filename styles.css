@@ -343,3 +343,214 @@ body {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Alicia cayendo - dentro de Contenido adicional */
+.fall-section {
+    position: relative;
+}
+
+.fall-sticky {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    z-index: 6;
+    pointer-events: none;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-left: 12px;
+}
+
+.alicia-fall {
+    width: 200px;
+    height: auto;
+    transform-origin: top left ;
+    margin-left: 50px;
+}
+
+@media (max-width: 768px) {
+    .alicia-fall {
+        width: 150px;
+    }
+}
+
+/* Sección de Proyectos */
+.projects-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 5rem 2rem;
+    position: relative;
+}
+
+.projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-section h2 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2d3748;
+    font-weight: 700;
+}
+
+.projects-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 4rem;
+    opacity: 0.8;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Widget de Proyecto */
+.project-widget {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.project-widget:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-placeholder {
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+.project-content {
+    padding: 2rem;
+}
+
+.project-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.project-content p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* Tecnologías */
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Enlaces del proyecto */
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-link {
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.project-link:first-child {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.project-link:first-child:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.project-link:last-child {
+    background: transparent;
+    color: #667eea;
+    border-color: #667eea;
+}
+
+.project-link:last-child:hover {
+    background: #667eea;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Responsive para proyectos */
+@media (max-width: 768px) {
+    .projects-section {
+        padding: 3rem 1rem;
+    }
+    
+    .projects-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .project-content {
+        padding: 1.5rem;
+    }
+    
+    .project-links {
+        flex-direction: column;
+    }
+    
+    .project-link {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-section h2 {
+        font-size: 2rem;
+    }
+    
+    .project-image {
+        height: 150px;
+    }
+    
+    .project-placeholder {
+        font-size: 3rem;
+    }
+}
+

@@ -217,3 +217,63 @@ function setupResponsiveAnimation() {
 
 // Inicializar responsive
 document.addEventListener('DOMContentLoaded', setupResponsiveAnimation);
+
+function setupAliciaFall() {
+    const section = document.querySelector('.content');
+    const img = document.getElementById('alicia-fall-frame');
+    if (!section || !img) return;
+    const frames = [
+        'img/alicia/1.png',
+        'img/alicia/2.png',
+        'img/alicia/3.png',
+        'img/alicia/4.png',
+        'img/alicia/5.png',
+        'img/alicia/6.png',
+        'img/alicia/7.png'
+    ];
+    const cache = frames.map(src => { const i = new Image(); i.src = src; return i; });
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    function update() {
+        const rect = section.getBoundingClientRect();
+        const winH = window.innerHeight;
+        const total = rect.height + winH;
+        const progressed = (winH - rect.top) / total;
+        const startShift = 0.16; // inicia antes: adelanta ~12% los frames
+        const progress = clamp(progressed + startShift, 0, 1);
+        
+        // Secuencia extendida: frame 1 (2 veces) + frames 2-5 (1 vez) + frames 6-7 (3 veces cada uno alternando)
+        // Total: 2 + 4 + 6 = 12 "slots" de tiempo
+        const totalSlots = 12;
+        const currentSlot = Math.floor(progress * totalSlots);
+        let idx;
+        
+        if (currentSlot < 2) {
+            // Frame 1 se muestra 2 veces (slots 0-1)
+            idx = 0;
+        } else if (currentSlot < 6) {
+            // Frames 2-5 se muestran 1 vez cada uno (slots 2-5)
+            idx = currentSlot - 1; // slots 2,3,4,5 -> frames 1,2,3,4 (índices 1,2,3,4)
+        } else {
+            // Frames 6-7 alternan 3 veces cada uno (slots 6-11)
+            const finalSlot = currentSlot - 6; // slots 0-5 en la sección final
+            const cyclePosition = finalSlot % 2; // alterna entre 0 y 1
+            idx = 5 + cyclePosition; // índices 5 y 6 (frames 6 y 7)
+        }
+        
+        idx = Math.min(frames.length - 1, Math.max(0, idx));
+        if (img.getAttribute('src') !== frames[idx]) img.setAttribute('src', frames[idx]);
+        
+        // Movimiento vertical únicamente
+        const travel = winH * 0.9;
+        const startY = -250;
+        const translateY = startY + progress * travel;
+        
+        img.style.transform = `translateY(${translateY.toFixed(2)}px)`;
+        img.style.willChange = 'transform';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+}
+
+document.addEventListener('DOMContentLoaded', setupAliciaFall);
